@@ -1,23 +1,23 @@
 pipeline {
     agent {
   kubernetes {
-    cloud 'kubernetes'
-    yaml '''apiVersion: v1
-                kind: Pod
-                spec:
-                  containers:
-                    - name: shell
-                  image: ubuntu
-                  command:
-                    - sleep
-                  args:
-                    - infinity'''
+    yaml '''
+    apiVersion: v1
+    kind: Pod
+    spec:
+      containers:
+      - name: shell
+        image: ubuntu
+        command:
+        - sleep
+        args:
+        - infinity'''
   }
 }
    stages {
-    container('shell'){
     stage('Hello World') {
         steps {
+          container('shell'){  
           sh 'echo Hello World'
         }
      }   
